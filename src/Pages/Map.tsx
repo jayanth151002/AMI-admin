@@ -1,11 +1,4 @@
-import Map, {
-  FullscreenControl,
-  Marker,
-  GeolocateControl,
-  NavigationControl,
-  ScaleControl,
-  Popup,
-} from "react-map-gl";
+import Map, { FullscreenControl, Marker, GeolocateControl, NavigationControl, ScaleControl, Popup, } from "react-map-gl";
 import { useState, useMemo } from "react";
 import camera from "../assets/cameraMarker.png";
 import CITIES from "../Data/cities.json";

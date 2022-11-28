@@ -1,0 +1,16 @@
+.home-header {
+    height: 10vh;
+}
+
+.home-content {
+    height: 80vh;
+}
+
+.home-footer {
+    height: 11vh;
+    background-color: rgb(183, 183, 167);
+}   
+
+.footer-main{
+    padding: 0px !important;
+}
