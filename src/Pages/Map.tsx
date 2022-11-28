@@ -7,7 +7,7 @@ import Map, {
   Popup,
 } from "react-map-gl";
 import { useState, useMemo } from "react";
-import camera from "../assest/cameraMarker.png";
+import camera from "../assets/cameraMarker.png";
 import CITIES from "../Data/cities.json";
 const MapAdmin = () => {
   const [popupInfo, setPopupInfo] = useState<{
@@ -49,7 +49,7 @@ const MapAdmin = () => {
           longitude: -100,
           zoom: 3.5,
           bearing: 0,
-          pitch: 180,
+          pitch: 0,
         }}
         style={{ width: "calc(100vw - 20px)", height: "calc(100vh - 20px)" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"

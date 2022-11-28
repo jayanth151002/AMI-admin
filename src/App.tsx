@@ -1,7 +1,15 @@
 import { Route, Switch } from "wouter";
 import MapAdmin from "./Pages/Map";
 import Home from "./Pages/Home";
-function App() {
+import { useEffect } from "react";
+import callApi from "./API";
+import actions from "./API/actions";
+const App = () => {
+  useEffect(() => {
+    const res = callApi(actions.CONNECT, {})
+    .then(res => console.log(res));
+  }, [])
+
   return (
     <div>
       <Switch>

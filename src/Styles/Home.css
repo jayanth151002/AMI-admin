@@ -1,0 +1,11 @@
+.home-header {
+    height: 10vh;
+}
+
+.home-content {
+    height: 75vh;
+}
+
+.home-footer {
+    max-height: 15vh;
+}   
