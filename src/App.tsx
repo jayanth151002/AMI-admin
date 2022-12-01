@@ -1,6 +1,7 @@
 import { Route, Switch } from "wouter";
 import MapAdmin from "./Pages/Map";
 import Home from "./Pages/Home";
+import LogOnMap from "./Pages/LogOnMap";
 import { Layout } from 'antd';
 import { useEffect } from "react";
 import callApi from "./API";
@@ -20,7 +21,7 @@ const App = () => {
   useEffect(() => {
     callApi(actions.GETLOGS, {})
       .then(res => dispatch(setLog(res.data)))
-  }, [])
+  })
 
   return (
     <div>
@@ -34,7 +35,8 @@ const App = () => {
           <div className='home-content'>
             <Switch>
               <Route path="/" component={Home} />
-              <Route path="/map" component={MapAdmin} />   // Tharun needs to fix the UI of this page 
+              <Route path="/map" component={MapAdmin} />   // Tharun needs to fix the UI of this page
+              <Route path="/map/:id" component={LogOnMap} />
               <Route path="/logs" component={Logs} />
             </Switch>
           </div>
