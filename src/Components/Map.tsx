@@ -8,8 +8,8 @@ import Map, {
   ScaleControl,
   Popup,
 } from "react-map-gl";
-import cameraImg from "../assets/cameraMarker.png";
-import personImg from "../assets/personMarker.png";
+import cameraImg from "../../public/cameraMarker.png";
+import personImg from "../../public/personMarker.png";
 import { useState, useMemo } from "react";
 type prop = {
   data?: Array<Camera>;

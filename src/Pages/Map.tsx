@@ -7,8 +7,8 @@ import Map, {
   Popup,
 } from "react-map-gl";
 import { useState, useMemo, useEffect } from "react";
-import cameraImg from "../assets/cameraMarker.png";
-import personImg from "../assets/personMarker.png";
+import cameraImg from "../../public/cameraMarker.png";
+import personImg from "../../public/personMarker.png";
 import callApi from "../API";
 import actions from "../API/actions";
 import Camera from "../Types/camType";

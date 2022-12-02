@@ -3,7 +3,7 @@ import MapAdmin from "./Pages/Map";
 import Home from "./Pages/Home";
 import LogOnMap from "./Pages/LogOnMap";
 import { Layout } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import callApi from "./API";
 import actions from "./API/actions";
 import { useAppDispatch } from "./Redux/hooks";
@@ -12,8 +12,13 @@ import { setLog, setNewLog } from "./Redux/slices/logSlice";
 import Logs from "./Pages/Logs";
 import "./Styles/App.css";
 import ProfileLog from "./Components/ProfileLog";
-import IItmLogo from "./assets/IIT_Madras_Logo.png";
-const { Header, Footer, Sider, Content } = Layout;
+import IItmLogo from "../public/IIT_Madras_Logo.png";
+import Logo from "../public/appLogo.jpg";
+// import { ToastContainer, toast } from "react-toastify";
+// import NewLogCard from "./Components/NewLogCard";
+// import { useAppSelector } from "./Redux/hooks";
+import "react-toastify/dist/ReactToastify.css";
+const { Header, Footer, Content } = Layout;
 
 const socket = io(import.meta.env.VITE_API_URL);
 
@@ -33,6 +38,7 @@ const App = () => {
       callApi(actions.GETLOGS, {}).then((res) => dispatch(setLog(res.data)));
     });
   }, []);
+  // const newLog = useAppSelector((state) => state.log.newLog);
 
   return (
     <div>
@@ -45,9 +51,18 @@ const App = () => {
             }}
           >
             <a href="/">
-              <img src={IItmLogo} width="50px" alt="IITM-logo" />
+              <img
+                src={Logo}
+                style={{
+                  borderRadius: "16px",
+                  border: "2px solid white",
+                  marginRight: "10px",
+                }}
+                width="50px"
+                alt="IITM-logo"
+              />
             </a>
-            <div className="home-header">Name</div>
+            <div className="home-header">AMI</div>
           </div>
         </Header>
         <Content>
@@ -87,6 +102,11 @@ const App = () => {
             </div>
           </div>
         </Footer>
+        {/* {JSON.stringify(newLog.profile) === "{}" ? (
+          "No new logs"
+        ) : (
+          <NewLogCard />
+        )} */}
       </Layout>
     </div>
   );
