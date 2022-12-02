@@ -18,7 +18,7 @@ const HomeContent = () => {
                     Logs
                 </div>
             </Col>
-            <Col span={5}>
+            {/* <Col span={5}>
                 <div className='home-content-grid-item'>
                     Analytics
                 </div>
@@ -27,7 +27,7 @@ const HomeContent = () => {
                 <div className='home-content-grid-item'>
                     Box 4
                 </div>
-            </Col>
+            </Col> */}
         </Row>
     )
 }

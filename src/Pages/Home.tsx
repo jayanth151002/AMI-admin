@@ -7,7 +7,6 @@ import '../Styles/Home.css';
 const Home = () => {
 
   const newLog = useAppSelector(state => state.log.newLog);
-  console.log(newLog)
   return (
     <div>
       <HomeGrid />
