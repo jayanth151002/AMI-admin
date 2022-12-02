@@ -58,7 +58,6 @@ const MapLog = ({ data, log }: prop) => {
       )),
     [data]
   );
-console.log(pins)
   return (
     <div>
       <Map
