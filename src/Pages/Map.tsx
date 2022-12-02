@@ -71,7 +71,7 @@ const MapAdmin = ({}) => {
   return (
     <div>
       <Map
-        mapboxAccessToken="pk.eyJ1IjoidnRoYXJ1biIsImEiOiJjbGFxZHhuNXExZXo4M3huNjI1MGFqamZsIn0.POWa6BJYlJv599EFgoy7Lg"
+        mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         initialViewState={{
           latitude: 12.9915,
           longitude: 80.2337,
