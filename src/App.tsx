@@ -18,7 +18,6 @@ const { Header, Footer, Sider, Content } = Layout;
 const socket = io(import.meta.env.VITE_API_URL);
 
 const App = () => {
-  const [triggerLog, setTriggerLog] = useState({});
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setNewLog({ profile: {}, log: {} }));
@@ -27,7 +26,7 @@ const App = () => {
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("we are connected to the server!!");
+      // console.log("we are connected to the server!!");
     });
     socket.on("connected", (data: any) => {
       dispatch(setNewLog({ profile: data?.profile?.Item, log: data?.log }));
