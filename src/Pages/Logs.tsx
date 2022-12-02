@@ -7,12 +7,12 @@ import { setActiveLog } from '../Redux/slices/logSlice';
 
 const Logs = () => {
     const logs = useAppSelector(state => state.log.value) as Log[];
-    const [location, setLocation] = useLocation();
-    const dispacth = useAppDispatch();
+    const [location, navigate] = useLocation();
+    const dispatch = useAppDispatch();
 
     const handleClick = (id: string) => {
-        dispacth(setActiveLog(id));
-        setLocation(`/map/${id}`)
+        dispatch(setActiveLog(id));
+        navigate(`/map/${id}`)
     }
 
     const columns: ColumnsType<Log> = [
