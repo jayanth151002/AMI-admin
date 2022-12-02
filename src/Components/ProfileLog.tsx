@@ -4,7 +4,7 @@ import { setActiveLog } from "../Redux/slices/logSlice";
 
 const ProfileLog = () => {
     const newLog = useAppSelector(state => state.log.newLog);
-    const [location, navigate] = useLocation();
+    const [, navigate] = useLocation();
     const dispatch = useAppDispatch();
 
     const handleClick = (id: string) => {

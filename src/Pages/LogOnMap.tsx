@@ -25,10 +25,10 @@ const LogOnMap = () => {
 
   return (
     <div>
-      {!logData ? (
+      {!logData && !log ? (
         <div>Loading...</div>
       ) : (
-        <MapLog data={logData} lat={log?.lat} lng={log?.long} />
+        <MapLog data={logData} log={log} />
       )}
     </div>
   );
