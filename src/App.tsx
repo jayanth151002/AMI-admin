@@ -3,7 +3,7 @@ import MapAdmin from "./Pages/Map";
 import Home from "./Pages/Home";
 import LogOnMap from "./Pages/LogOnMap";
 import { Layout } from 'antd';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import callApi from "./API";
 import actions from "./API/actions";
 import { useAppDispatch } from "./Redux/hooks";
@@ -19,7 +19,6 @@ const { Header, Footer, Sider, Content } = Layout;
 const socket = io(import.meta.env.VITE_API_URL);
 
 const App = () => {
-  const [triggerLog, setTriggerLog] = useState({});
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setNewLog({ profile: {}, log: {} }))
@@ -29,7 +28,7 @@ const App = () => {
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("we are connected to the server!!");
+      // console.log("we are connected to the server!!");
     });
     socket.on("connected", (data: any) => {
       dispatch(setNewLog({ profile: data?.profile?.Item, log: data?.log }))

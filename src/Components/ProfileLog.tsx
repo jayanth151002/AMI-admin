@@ -62,7 +62,7 @@ const ProfileLog = () => {
                 pagination={{ position: ["none", "none"] as any }}
               />
             </div>
-            <p>Date and Time : {(newLog.profile as any).timestamp}</p>
+            <p>Date and Time : {(newLog.log as any).timestamp}</p>
           </Card>
         </div>
       )}

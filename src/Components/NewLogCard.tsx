@@ -9,7 +9,7 @@ const NewLogCard = () => {
 
     return (
         <div>
-            <Alert message="Attention!!!" description={newLog.profile.name + "is in an emergency. Click here to viwe more details"} 
+            <Alert message="Attention!!!" description={newLog.profile.name + " is in an emergency. Click here to view more details"} 
             type="warning" showIcon onClick={()=>navigate('/log/profile')}/>
         </div>
     )
