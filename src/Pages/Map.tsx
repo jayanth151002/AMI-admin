@@ -1,8 +1,7 @@
 import Map, { FullscreenControl, Marker, GeolocateControl, NavigationControl, ScaleControl, Popup, } from "react-map-gl";
 import { useState, useMemo } from "react";
 import camera from "../assets/cameraMarker.png";
-import CITIES from "../Data/cities.json";
-const MapAdmin = () => {
+const MapAdmin = ({}) => {
   const [popupInfo, setPopupInfo] = useState<{
     city: string;
     population: string;
@@ -12,27 +11,27 @@ const MapAdmin = () => {
     longitude: number;
   } | null>(null);
 
-  const pins = useMemo(
-    () =>
-      CITIES.map((city, index) => (
-        <Marker
-          key={`marker-${index}`}
-          longitude={city.longitude}
-          latitude={city.latitude}
-          anchor="bottom"
-          onClick={(e) => {
-            e.originalEvent.stopPropagation();
-            setPopupInfo(city);
-          }}
-        >
-          <img
-            src={camera}
-            style={{ width: "20px", height: "20px", cursor: "pointer" }}
-          />
-        </Marker>
-      )),
-    []
-  );
+  // const pins = useMemo(
+  //   () =>
+  //     CITIES.map((city, index) => (
+  //       <Marker
+  //         key={`marker-${index}`}
+  //         longitude={city.longitude}
+  //         latitude={city.latitude}
+  //         anchor="bottom"
+  //         onClick={(e) => {
+  //           e.originalEvent.stopPropagation();
+  //           setPopupInfo(city);
+  //         }}
+  //       >
+  //         <img
+  //           src={camera}
+  //           style={{ width: "20px", height: "20px", cursor: "pointer" }}
+  //         />
+  //       </Marker>
+  //     )),
+  //   []
+  // );
   return (
     <div>
       <Map
@@ -52,7 +51,7 @@ const MapAdmin = () => {
         <FullscreenControl position="top-right" />
         <NavigationControl position="top-right" />
         <ScaleControl />
-        {pins}
+        {/* {pins} */}
         {popupInfo && (
           <Popup
             anchor="top"

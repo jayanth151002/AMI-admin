@@ -1,29 +1,37 @@
 import { useAppSelector } from "../Redux/hooks";
 import Log from "../Types/logType";
+import Camera from "../Types/camType";
 import callApi from "../API";
 import actions from "../API/actions";
 import { useState, useEffect } from "react";
-
-type propsType = {
-    id: string
-}
-
+import MapLog from "../Components/Map";
 const LogOnMap = () => {
-
-    const id = useAppSelector(state => state.log.activeLog) as string;
-    const logs = Object.values(useAppSelector(state => state.log.value)) as Log[];
-    const log = logs?.filter((log: Log) => log.logId === id)[0]
+  const [logData, setLogData] = useState<Array<Camera> | undefined>(undefined);
+  const [log, setLog] = useState<Log | undefined>(undefined);
+  const id = useAppSelector((state) => state.log.activeLog) as string;
+  const logs = Object.values(
+    useAppSelector((state) => state.log.value)
+  ) as Log[];
+  useEffect(() => {
+    const log = logs?.filter((log: Log) => log.logId === id)[0];
+    setLog(log);
     callApi(actions.GETCAMS, {
-        lat: log.lat,
-        long: log.long
+      lat: log.lat,
+      long: log.long,
     })
-        .then(res => console.log(res))
+      .then((res) => setLogData(res.data))
+      .catch(() => setLogData(undefined));
+  }, []);
 
-    return (
-        <div>
-            LogOnMap
-        </div>
-    )
-}
+  return (
+    <div>
+      {!logData ? (
+        <div>Loading...</div>
+      ) : (
+        <MapLog data={logData} lat={log?.lat} lng={log?.long} />
+      )}
+    </div>
+  );
+};
 
-export default LogOnMap
+export default LogOnMap;
