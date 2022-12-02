@@ -71,7 +71,7 @@ const MapAdmin = ({}) => {
   return (
     <div>
       <Map
-        mapboxAccessToken="pk.eyJ1IjoidnRoYXJ1biIsImEiOiJjbGFxZHhuNXExZXo4M3huNjI1MGFqamZsIn0.POWa6BJYlJv599EFgoy7Lg"
+        mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         initialViewState={{
           latitude: 12.9915,
           longitude: 80.2337,
@@ -79,7 +79,7 @@ const MapAdmin = ({}) => {
           bearing: 0,
           pitch: 0,
         }}
-        style={{ width: "calc(100vw - 20px)", height: "calc(100vh - 120px)" }}
+        style={{ width: "calc(100vw - 20px)", height: "89vh" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         attributionControl={false}
       >

@@ -69,7 +69,7 @@ const MapLog = ({ data, log }: prop) => {
           bearing: 0,
           pitch: 0,
         }}
-        style={{ width: "calc(100vw - 20px)", height: "calc(100vh - 120px)" }}
+        style={{ width: "calc(100vw - 20px)", height: "80vh" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         attributionControl={false}
       >
