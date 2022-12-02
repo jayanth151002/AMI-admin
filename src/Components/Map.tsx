@@ -1,3 +1,5 @@
+import Camera from "../Types/camType";
+import Log from "../Types/logType";
 import Map, {
   FullscreenControl,
   Marker,
@@ -6,29 +8,38 @@ import Map, {
   ScaleControl,
   Popup,
 } from "react-map-gl";
-import { useState, useMemo, useEffect } from "react";
 import cameraImg from "../assets/cameraMarker.png";
 import personImg from "../assets/personMarker.png";
-import callApi from "../API";
-import actions from "../API/actions";
-import Camera from "../Types/camType";
-import Log from "../Types/logType";
-const MapAdmin = ({}) => {
+import { useState, useMemo } from "react";
+type prop = {
+  data?: Array<Camera>;
+  log?: Log;
+};
+const MapLog = ({ data, log }: prop) => {
   const [popupInfo, setPopupInfo] = useState<Camera | null>(null);
   const [logpopupInfo, setLogPopupInfo] = useState<Log | undefined>(undefined);
-  const [cameras, setCameras] = useState<Array<Camera> | undefined>(undefined);
-  const [logs, setLog] = useState<Array<Log> | undefined>(undefined);
-  useEffect(() => {
-    callApi(actions.GETCAM, {})
-      .then((res) => setCameras(res.data))
-      .catch(() => setCameras(undefined));
-    callApi(actions.GETLOGS, {})
-      .then((res) => setLog(res.data))
-      .catch(() => setLog(undefined));
-  }, []);
+  const logPin = useMemo(
+    () => (
+      <Marker
+        longitude={Number(log?.long)}
+        latitude={Number(log?.lat)}
+        anchor="bottom"
+        onClick={(e) => {
+          e.originalEvent.stopPropagation();
+          setLogPopupInfo(log);
+        }}
+      >
+        <img
+          src={personImg}
+          style={{ width: "50px", height: "40px", cursor: "pointer" }}
+        />
+      </Marker>
+    ),
+    [log]
+  );
   const pins = useMemo(
     () =>
-      cameras?.map((camera, index) => (
+      data?.map((camera, index) => (
         <Marker
           key={`marker-${index}`}
           longitude={Number(JSON.parse(camera.camPosition).longitude)}
@@ -45,37 +56,16 @@ const MapAdmin = ({}) => {
           />
         </Marker>
       )),
-    [cameras]
+    [data]
   );
-  const logPin = useMemo(
-    () =>
-      logs?.map((log, index) => (
-        <Marker
-          longitude={Number(log?.long)}
-          latitude={Number(log?.lat)}
-          anchor="bottom"
-          onClick={(e) => {
-            e.originalEvent.stopPropagation();
-            setLogPopupInfo(log);
-          }}
-        >
-          <img
-            src={personImg}
-            style={{ width: "50px", height: "40px", cursor: "pointer" }}
-          />
-        </Marker>
-      )),
-    [logs]
-  );
-
   return (
     <div>
       <Map
-        mapboxAccessToken="pk.eyJ1IjoidnRoYXJ1biIsImEiOiJjbGFxZHhuNXExZXo4M3huNjI1MGFqamZsIn0.POWa6BJYlJv599EFgoy7Lg"
+        mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
         initialViewState={{
-          latitude: 12.9915,
-          longitude: 80.2337,
-          zoom: 17,
+          latitude: Number(log?.lat),
+          longitude: Number(log?.long),
+          zoom: 15,
           bearing: 0,
           pitch: 0,
         }}
@@ -87,8 +77,9 @@ const MapAdmin = ({}) => {
         <FullscreenControl position="top-right" />
         <NavigationControl position="top-right" />
         <ScaleControl />
-        {pins}
         {logPin}
+        {pins}
+
         {popupInfo && (
           <Popup
             anchor="top"
@@ -109,6 +100,7 @@ const MapAdmin = ({}) => {
             </div>
           </Popup>
         )}
+
         {logpopupInfo && (
           <Popup
             anchor="top"
@@ -127,4 +119,4 @@ const MapAdmin = ({}) => {
   );
 };
 
-export default MapAdmin;
+export default MapLog;

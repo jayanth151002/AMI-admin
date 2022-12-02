@@ -1,11 +1,3 @@
-.home-header {
-    height: 10vh;
+.notifs-div{
+    padding-top: 3rem;
 }
-
-.home-content {
-    height: 75vh;
-}
-
-.home-footer {
-    max-height: 15vh;
-}   
