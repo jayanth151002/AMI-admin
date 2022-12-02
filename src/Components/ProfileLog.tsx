@@ -1,5 +1,4 @@
 import { Card, Table } from "antd";
-import Meta from "antd/es/card/Meta";
 import { useLocation } from "wouter";
 import { useAppDispatch, useAppSelector } from "../Redux/hooks";
 import { setActiveLog } from "../Redux/slices/logSlice";
@@ -62,7 +61,7 @@ const ProfileLog = () => {
                 pagination={{ position: ["none", "none"] as any }}
               />
             </div>
-            <p>Date and Time : {(newLog.profile as any).timestamp}</p>
+            <p>Date and Time : {(newLog.log as any).timestamp}</p>
           </Card>
         </div>
       )}

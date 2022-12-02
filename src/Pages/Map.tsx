@@ -75,11 +75,11 @@ const MapAdmin = ({}) => {
         initialViewState={{
           latitude: 12.9915,
           longitude: 80.2337,
-          zoom: 17,
+          zoom: 15,
           bearing: 0,
           pitch: 0,
         }}
-        style={{ width: "calc(100vw - 20px)", height: "89vh" }}
+        style={{ width: "calc(100vw - 20px)", height: "calc(90vh - 115px)" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         attributionControl={false}
       >
@@ -87,7 +87,7 @@ const MapAdmin = ({}) => {
         <FullscreenControl position="top-right" />
         <NavigationControl position="top-right" />
         <ScaleControl />
-        {pins}
+        {/* {pins} */}
         {logPin}
         {popupInfo && (
           <Popup

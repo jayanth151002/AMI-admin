@@ -69,7 +69,7 @@ const MapLog = ({ data, log }: prop) => {
           bearing: 0,
           pitch: 0,
         }}
-        style={{ width: "calc(100vw - 20px)", height: "80vh" }}
+        style={{ width: "calc(100vw - 20px)", height: "calc(90vh - 115px)" }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         attributionControl={false}
       >
@@ -79,7 +79,6 @@ const MapLog = ({ data, log }: prop) => {
         <ScaleControl />
         {logPin}
         {pins}
-
         {popupInfo && (
           <Popup
             anchor="top"
@@ -100,7 +99,6 @@ const MapLog = ({ data, log }: prop) => {
             </div>
           </Popup>
         )}
-
         {logpopupInfo && (
           <Popup
             anchor="top"
