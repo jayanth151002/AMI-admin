@@ -2,8 +2,15 @@ import { Route, Switch } from "wouter";
 import MapAdmin from "./Pages/Map";
 import Home from "./Pages/Home";
 import LogOnMap from "./Pages/LogOnMap";
-import { Layout } from "antd";
-import { useEffect } from "react";
+import { Button, Layout } from "antd";
+import {
+  JSXElementConstructor,
+  ReactElement,
+  ReactFragment,
+  ReactNode,
+  ReactPortal,
+  useEffect,
+} from "react";
 import callApi from "./API";
 import actions from "./API/actions";
 import { useAppDispatch } from "./Redux/hooks";
@@ -14,34 +21,50 @@ import "./Styles/App.css";
 import ProfileLog from "./Components/ProfileLog";
 import IItmLogo from "../public/IIT_Madras_Logo.png";
 import Logo from "../public/appLogo.jpg";
-// import { ToastContainer, toast } from "react-toastify";
-// import NewLogCard from "./Components/NewLogCard";
-// import { useAppSelector } from "./Redux/hooks";
+import { ToastContainer, toast, ToastContentProps } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Log from "./Types/logType";
+import { useLocation } from "wouter";
 const { Header, Footer, Content } = Layout;
-
 const socket = io(import.meta.env.VITE_API_URL);
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const [, navigate] = useLocation();
+
+  const notify = (res: Log) => {
+    console.log(res);
+    const CustomToastWithLink = () => {
+      return (
+        <div>
+          <Button danger onClick={() => navigate("/log/profile")}>
+            Danger Default
+          </Button>
+        </div>
+      );
+    };
+    toast.error(CustomToastWithLink);
+  };
+
   useEffect(() => {
     dispatch(setNewLog({ profile: {}, log: {} }));
     callApi(actions.GETLOGS, {}).then((res) => dispatch(setLog(res.data)));
   }, []);
 
   useEffect(() => {
-    socket.on("connect", () => {
-      // console.log("we are connected to the server!!");
-    });
+    socket.on("connect", () => {});
     socket.on("connected", (data: any) => {
       dispatch(setNewLog({ profile: data?.profile?.Item, log: data?.log }));
-      callApi(actions.GETLOGS, {}).then((res) => dispatch(setLog(res.data)));
+      callApi(actions.GETLOGS, {}).then((res) => {
+        notify(res.data);
+        dispatch(setLog(res.data));
+      });
     });
   }, []);
-  // const newLog = useAppSelector((state) => state.log.newLog);
 
   return (
     <div>
+      <ToastContainer />
       <Layout>
         <Header>
           <div
@@ -102,11 +125,6 @@ const App = () => {
             </div>
           </div>
         </Footer>
-        {/* {JSON.stringify(newLog.profile) === "{}" ? (
-          "No new logs"
-        ) : (
-          <NewLogCard />
-        )} */}
       </Layout>
     </div>
   );

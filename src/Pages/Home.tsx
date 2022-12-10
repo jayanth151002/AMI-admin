@@ -1,27 +1,44 @@
-import { Col, Row } from 'antd';
-import HomeGrid from '../Components/HomeGrid';
-import NewLogCard from '../Components/NewLogCard';
-import { useAppSelector } from '../Redux/hooks';
-import '../Styles/Home.css';
+import { Col, Row } from "antd";
+import NewLogCard from "../Components/NewLogCard";
+import { useAppSelector } from "../Redux/hooks";
+import { useLocation } from "wouter";
+import "../Styles/Home.css";
 
 const Home = () => {
-
-  const newLog = useAppSelector(state => state.log.newLog);
+  const newLog = useAppSelector((state) => state.log.newLog);
+  const [, navigate] = useLocation();
   return (
     <div>
-      <HomeGrid />
-      <Row>
-        <Col span={20} offset={2}>
-          <div className="notifs-div">
-            <h1>
-              Notifications
-            </h1>
-            {JSON.stringify(newLog.profile) === '{}' ? "No new logs" : <NewLogCard />}
+      <Row className="home-content-grid">
+        <Col span={5} offset={2}>
+          <div
+            className="home-content-grid-item"
+            onClick={() => navigate("/map")}
+          >
+            Map
           </div>
         </Col>
+        <Col span={5}>
+          <div
+            className="home-content-grid-item"
+            onClick={() => navigate("/logs")}
+          >
+            Logs
+          </div>
+        </Col>
+        {/* <Col span={5}>
+                <div className='home-content-grid-item'>
+                    Analytics
+                </div>
+            </Col>
+            <Col span={5}>
+                <div className='home-content-grid-item'>
+                    Box 4
+                </div>
+            </Col> */}
       </Row>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

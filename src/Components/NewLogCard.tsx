@@ -5,7 +5,7 @@ import { useAppSelector } from "../Redux/hooks";
 const NewLogCard = () => {
 
     const newLog = useAppSelector(state => state.log.newLog);
-    const [location, navigate] = useLocation();
+    const [, navigate] = useLocation();
 
     return (
         <div>
