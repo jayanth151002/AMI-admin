@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div>
       <Row className="home-content-grid">
-        <Col span={5} offset={2}>
+        <Col span={6} offset={4}>
           <div
             className="home-content-grid-item"
             onClick={() => navigate("/map")}
@@ -18,7 +18,7 @@ const Home = () => {
             Map
           </div>
         </Col>
-        <Col span={5}>
+        <Col span={6} offset={4}>
           <div
             className="home-content-grid-item"
             onClick={() => navigate("/logs")}

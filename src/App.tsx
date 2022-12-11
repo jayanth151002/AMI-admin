@@ -21,7 +21,7 @@ import "./Styles/App.css";
 import ProfileLog from "./Components/ProfileLog";
 import IItmLogo from "../public/IIT_Madras_Logo.png";
 import Logo from "../public/appLogo.jpg";
-import { ToastContainer, toast, ToastContentProps } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Log from "./Types/logType";
 import { useLocation } from "wouter";
@@ -32,18 +32,18 @@ const App = () => {
   const dispatch = useAppDispatch();
   const [, navigate] = useLocation();
 
-  const notify = (res: Log) => {
-    console.log(res);
+  const notify = (profile: any) => {
     const CustomToastWithLink = () => {
       return (
         <div>
-          <Button danger onClick={() => navigate("/log/profile")}>
-            Danger Default
+          Attention!!! {profile.name} is in an emergency.
+          <Button danger onClick={() => navigate("/log/profile")} style={{marginTop:"10px"}}>
+            View Details
           </Button>
         </div>
       );
     };
-    toast.error(CustomToastWithLink);
+    toast.error(CustomToastWithLink, { autoClose: 50000 });
   };
 
   useEffect(() => {
@@ -52,11 +52,11 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("connect", () => {});
+    socket.on("connect", () => { });
     socket.on("connected", (data: any) => {
       dispatch(setNewLog({ profile: data?.profile?.Item, log: data?.log }));
       callApi(actions.GETLOGS, {}).then((res) => {
-        notify(res.data);
+        notify(data?.profile?.Item);
         dispatch(setLog(res.data));
       });
     });
